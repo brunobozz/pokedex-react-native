@@ -1,43 +1,36 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import * as eva from "@eva-design/eva";
+import {
+  ApplicationProvider,
+  Layout,
+  Text,
+  Button,
+} from "@ui-kitten/components";
+import { Image } from "react-native";
 import { useRouter } from "expo-router";
 
 export default function Page() {
   const router = useRouter();
+  const imgUrl =
+    "https://i.pinimg.com/originals/05/8c/c1/058cc1913cf7d2bd93d6153ad22205f5.png";
 
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Pokedex</Text>
+    <ApplicationProvider {...eva} theme={eva.dark}>
+      <Layout
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      >
+        <Image source={{ uri: imgUrl }} style={{ width: 200, height: 200 }} />
+        <Text category="h1">Pokedex</Text>
         <Button
-          title="Pokemons List"
+          style={{ marginTop: 20 }}
           onPress={() => {
             router.push("/PokemonList");
           }}
-        />
-      </View>
-    </View>
+        >
+          {" "}
+          Pokemon List
+        </Button>
+      </Layout>
+    </ApplicationProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
-  },
-});
