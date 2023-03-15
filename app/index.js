@@ -30,6 +30,16 @@ export default function Page() {
           {" "}
           Pokemon List
         </Button>
+
+        <Button
+          style={{ marginTop: 20 }}
+          onPress={() => {
+            router.push("/Pokemon?id=1");
+          }}
+        >
+          {" "}
+          Pokemon Page
+        </Button>
       </Layout>
     </ApplicationProvider>
   );
