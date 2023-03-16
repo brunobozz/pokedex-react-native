@@ -11,6 +11,7 @@ export default function CompPokemonList(props) {
       ItemSeparatorComponent={Divider}
       renderItem={({ item }) => (
         <ListItem
+          key={item.id}
           onPress={() => {
             router.push("/Pokemon?id=" + item.id);
           }}

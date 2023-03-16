@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components/ui";
 import { Divider, useTheme } from "@ui-kitten/components";
+import CompCircleType from "./CompCircleType";
 
 export default function CompPokemonInfo(props) {
   const theme = useTheme();
@@ -11,12 +12,30 @@ export default function CompPokemonInfo(props) {
         <Text style={{ color: "#fff" }}>Type</Text>
         <Layout style={styles.types}>
           {props.pokemon.pokemon_v2_pokemontypes.map((pokeType, index) => (
-            <Text
+            <Layout
               key={index}
-              style={{ color: "#fff", textTransform: "uppercase" }}
+              style={[
+                styles.typesItem,
+                {
+                  backgroundColor:
+                    theme["type-" + pokeType.pokemon_v2_type.name],
+                },
+              ]}
             >
-              {pokeType.pokemon_v2_type.name}
-            </Text>
+              <CompCircleType
+                type={pokeType.pokemon_v2_type.name}
+              ></CompCircleType>
+              <Text
+                style={{
+                  color: "#fff",
+                  textTransform: "uppercase",
+                  fontSize: 12,
+                  fontWeight: "bold",
+                }}
+              >
+                {pokeType.pokemon_v2_type.name}
+              </Text>
+            </Layout>
           ))}
         </Layout>
       </Layout>
@@ -33,7 +52,9 @@ export default function CompPokemonInfo(props) {
       <Divider style={{ backgroundColor: theme["type-" + props.type] }} />
       <Layout style={styles.item}>
         <Text style={{ color: "#fff" }}>Base Experience</Text>
-        <Text style={{ color: "#fff" }}>{props.pokemon.base_experience}</Text>
+        <Text style={{ color: "#fff" }}>
+          {props.pokemon.base_experience} xp
+        </Text>
       </Layout>
       <Divider style={{ backgroundColor: theme["type-" + props.type] }} />
       <Layout style={styles.item}>
@@ -65,6 +86,15 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     backgroundColor: "transparent",
+  },
+  typesItem: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 2,
+    paddingRight: 7,
+    borderRadius: 5,
+    marginLeft: 5,
   },
   abilities: {
     display: "flex",

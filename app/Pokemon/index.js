@@ -22,7 +22,7 @@ export default function Pokemon() {
     });
   }, [id]);
 
-  if (pokemon) {
+  if (pokemon && type) {
     return (
       <Layout
         style={{
