@@ -3,14 +3,15 @@ import { useRoute } from "@react-navigation/native";
 import CompPokemonHeader from "../../components/CompPokemonHeader";
 import { StatusBar } from "react-native";
 import { getPokemonInfo } from "../../graphql/GetPokemonInfo";
-import { useTheme } from "@ui-kitten/components";
+import { Layout, useTheme } from "@ui-kitten/components";
 import CompPokemonImage from "../../components/CompPokemonImage";
+import CompPokemonInfo from "../../components/CompPokemonInfo";
 
 export default function Pokemon() {
   const route = useRoute();
   const { id } = route.params;
   const [pokemon, setPokemon] = useState(null);
-  const [type, setType] = useState("");
+  const [type, setType] = useState("normal");
   const theme = useTheme();
 
   // get the pokemon by ID
@@ -23,7 +24,12 @@ export default function Pokemon() {
 
   if (pokemon) {
     return (
-      <>
+      <Layout
+        style={{
+          height: "100%",
+          backgroundColor: theme["type-" + type + "-100"],
+        }}
+      >
         <StatusBar
           barStyle="light-content"
           hidden={false}
@@ -36,7 +42,8 @@ export default function Pokemon() {
           type={type}
         ></CompPokemonHeader>
         <CompPokemonImage id={pokemon.id} type={type}></CompPokemonImage>
-      </>
+        <CompPokemonInfo pokemon={pokemon} type={type}></CompPokemonInfo>
+      </Layout>
     );
   }
 }

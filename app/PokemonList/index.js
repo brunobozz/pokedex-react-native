@@ -1,5 +1,3 @@
-import * as eva from "@eva-design/eva";
-import { ApplicationProvider, Text } from "@ui-kitten/components";
 import { useEffect, useState } from "react";
 import { getPokemonList } from "../../graphql/GetPokemonList";
 import CompPokemonList from "../../components/CompPokemonList";
