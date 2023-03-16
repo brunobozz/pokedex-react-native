@@ -1,15 +1,22 @@
-import * as eva from "@eva-design/eva";
-import { ApplicationProvider, Text } from "@ui-kitten/components";
 import { useEffect, useState } from "react";
 import { useRoute } from "@react-navigation/native";
-
+import CompPokemonHeader from "../../components/CompPokemonHeader";
 import { StatusBar } from "react-native";
+import { getPokemonInfo } from "../../graphql/GetPokemonInfo";
 
 export default function Pokemon() {
   const route = useRoute();
   const { id } = route.params;
+  const [pokemon, setPokemon] = useState(null);
 
-  if (id) {
+  // get the list
+  useEffect(() => {
+    getPokemonInfo(id).then((data) => {
+      setPokemon(data);
+    });
+  }, [id]);
+
+  if (pokemon) {
     return (
       <>
         <StatusBar
@@ -18,9 +25,10 @@ export default function Pokemon() {
           backgroundColor="#900"
           translucent={false}
         />
-        <ApplicationProvider {...eva} theme={eva.light}>
-          <Text category="h1">Pokemon Page ID: {id}</Text>
-        </ApplicationProvider>
+        <CompPokemonHeader
+          id={pokemon.id}
+          name={pokemon.name}
+        ></CompPokemonHeader>
       </>
     );
   }

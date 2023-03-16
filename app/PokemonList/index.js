@@ -40,10 +40,8 @@ export default function PokemonList() {
         backgroundColor="#900"
         translucent={false}
       />
-      <ApplicationProvider {...eva} theme={eva.light}>
-        <CompSearchForm onSearch={pokeSearch}></CompSearchForm>
-        <CompPokemonList list={filteredPokemonList} />
-      </ApplicationProvider>
+      <CompSearchForm onSearch={pokeSearch}></CompSearchForm>
+      <CompPokemonList list={filteredPokemonList} />
     </>
   );
 }
