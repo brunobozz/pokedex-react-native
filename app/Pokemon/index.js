@@ -27,7 +27,7 @@ export default function Pokemon() {
         <StatusBar
           barStyle="light-content"
           hidden={false}
-          backgroundColor={theme["type-" + type]}
+          backgroundColor={theme["type-" + type + "-100"]}
           translucent={false}
         />
         <CompPokemonHeader

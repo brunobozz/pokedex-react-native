@@ -10,7 +10,10 @@ export default function CompPokemonHeader(props) {
 
   return (
     <Layout
-      style={[styles.header, { backgroundColor: theme["type-" + props.type] }]}
+      style={[
+        styles.header,
+        { backgroundColor: theme["type-" + props.type + "-100"] },
+      ]}
     >
       <Text style={styles.text} category="h6">
         {props.id} - {props.name}
@@ -35,6 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 10,
+    position: "relative",
   },
   text: {
     color: "#fff",
