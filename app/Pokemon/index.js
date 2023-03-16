@@ -4,6 +4,7 @@ import CompPokemonHeader from "../../components/CompPokemonHeader";
 import { StatusBar } from "react-native";
 import { getPokemonInfo } from "../../graphql/GetPokemonInfo";
 import { useTheme } from "@ui-kitten/components";
+import CompPokemonImage from "../../components/CompPokemonImage";
 
 export default function Pokemon() {
   const route = useRoute();
@@ -34,6 +35,7 @@ export default function Pokemon() {
           name={pokemon.name}
           type={type}
         ></CompPokemonHeader>
+        <CompPokemonImage id={pokemon.id} type={type}></CompPokemonImage>
       </>
     );
   }
