@@ -9,10 +9,6 @@ export default function PokemonList() {
   const [pokemonList, setPokemonList] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [timeoutId, setTimeoutId] = useState(null);
-  console.log("                    ");
-  console.log("                    ");
-  console.log("                    ");
-  console.log("WORKS");
 
   // get the list
   useEffect(() => {
