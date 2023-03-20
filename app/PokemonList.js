@@ -3,11 +3,16 @@ import { getPokemonList } from "../graphql/GetPokemonList";
 import CompPokemonList from "../components/CompPokemonList";
 import CompSearchForm from "../components/CompSearchForm";
 import { StatusBar } from "react-native";
+import { Spinner } from "native-base";
 
 export default function PokemonList() {
   const [pokemonList, setPokemonList] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [timeoutId, setTimeoutId] = useState(null);
+  console.log("                    ");
+  console.log("                    ");
+  console.log("                    ");
+  console.log("WORKS");
 
   // get the list
   useEffect(() => {
@@ -39,7 +44,13 @@ export default function PokemonList() {
         translucent={false}
       />
       <CompSearchForm onSearch={pokeSearch}></CompSearchForm>
-      <CompPokemonList list={filteredPokemonList} />
+      {pokemonList ? (
+        <CompPokemonList
+          list={filteredPokemonList?.filter((pokemon) => pokemon.id)}
+        />
+      ) : (
+        <Spinner></Spinner>
+      )}
     </>
   );
 }

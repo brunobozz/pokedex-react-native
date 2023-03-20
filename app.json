@@ -2,7 +2,7 @@
   "expo": {
     "name": "pokedex-react-native",
     "slug": "pokedex-react-native",
-    "version": "1.0.0",
+    "version": "0.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
