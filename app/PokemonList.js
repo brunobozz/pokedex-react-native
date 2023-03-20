@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getPokemonList } from "../../graphql/GetPokemonList";
-import CompPokemonList from "../../components/CompPokemonList";
-import CompSearchForm from "../../components/CompSearchForm";
+import { getPokemonList } from "../graphql/GetPokemonList";
+import CompPokemonList from "../components/CompPokemonList";
+import CompSearchForm from "../components/CompSearchForm";
 import { StatusBar } from "react-native";
 
 export default function PokemonList() {

@@ -1,40 +1,49 @@
-import React from "react";
-import { Layout, Text, Button } from "@ui-kitten/components";
-import { Image } from "react-native";
-import { useRouter } from "expo-router";
 import { StatusBar } from "react-native";
+import { useEffect, useState } from "react";
+import { useRoute } from "@react-navigation/native";
+import { Layout, useTheme } from "@ui-kitten/components";
+import { getPokemonInfo } from "../graphql/GetPokemonInfo";
+import CompPokemonHeader from "../components/CompPokemonHeader";
+import CompPokemonImage from "../components/CompPokemonImage";
+import CompPokemonInfo from "../components/CompPokemonInfo";
 
-export default function Page() {
-  const router = useRouter();
-  const imgUrl =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/800px-Pok%C3%A9_Ball_icon.svg.png";
+export default function Pokemon() {
+  const route = useRoute();
+  const { id } = route.params ? route.params : { id: 1 };
+  const [pokemon, setPokemon] = useState(null);
+  const [type, setType] = useState("normal");
+  const theme = useTheme();
 
-  return (
-    <Layout
-      style={{
-        backgroundColor: "#b00",
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <StatusBar
-        barStyle="light-content"
-        hidden={false}
-        backgroundColor="#b00"
-        translucent={false}
-      />
-      <Image source={{ uri: imgUrl }} style={{ width: 200, height: 200 }} />
-      <Button
-        style={{ marginTop: 20 }}
-        status="danger"
-        onPress={() => {
-          router.push("/PokemonList");
+  // get the pokemon by ID
+  useEffect(() => {
+    getPokemonInfo(id).then((data) => {
+      setPokemon(data);
+      setType(data.pokemon_v2_pokemontypes[0].pokemon_v2_type.name);
+    });
+  }, [id]);
+
+  if (pokemon && type) {
+    return (
+      <Layout
+        style={{
+          height: "100%",
+          backgroundColor: theme["type-" + type + "-100"],
         }}
       >
-        {" "}
-        Pokemon List
-      </Button>
-    </Layout>
-  );
+        <StatusBar
+          barStyle="light-content"
+          hidden={false}
+          backgroundColor={theme["type-" + type + "-100"]}
+          translucent={false}
+        />
+        <CompPokemonHeader
+          id={pokemon.id}
+          name={pokemon.name}
+          type={type}
+        ></CompPokemonHeader>
+        <CompPokemonImage id={pokemon.id} type={type}></CompPokemonImage>
+        <CompPokemonInfo pokemon={pokemon} type={type}></CompPokemonInfo>
+      </Layout>
+    );
+  }
 }

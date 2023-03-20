@@ -15,7 +15,7 @@ export default function CompPokemonList(props) {
           key={item.id}
           style={styles.listItem}
           onPress={() => {
-            router.push("/Pokemon?id=" + item.id);
+            router.push("/?id=" + item.id);
           }}
         >
           <Text
@@ -23,8 +23,8 @@ export default function CompPokemonList(props) {
           >{`${item.id} - ${item.name}`}</Text>
 
           <Layout style={styles.types}>
-            {item.pokemon_v2_pokemontypes.map((type) => (
-              <Layout style={styles.circle}>
+            {item.pokemon_v2_pokemontypes.map((type, index) => (
+              <Layout key={index} style={styles.circle}>
                 <CompCircleType
                   type={type.pokemon_v2_type.name}
                 ></CompCircleType>

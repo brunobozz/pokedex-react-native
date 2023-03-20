@@ -19,7 +19,7 @@ export default function CompCircleType(props) {
       case "fire":
         return require("../assets/icons/type/fire.png");
       case "flying":
-        return require("../assets/icons/type/fire.png");
+        return require("../assets/icons/type/flying.png");
       case "ghost":
         return require("../assets/icons/type/ghost.png");
       case "grass":
