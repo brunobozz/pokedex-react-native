@@ -2,12 +2,18 @@ import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components/ui";
 import { Divider, useTheme } from "@ui-kitten/components";
 import CompCircleType from "./CompCircleType";
+import { useEffect, useState } from "react";
 
 export default function CompPokemonInfo(props) {
   const theme = useTheme();
+  const [type, setType] = useState("normal");
+
+  useEffect(() => {
+    setType(props.pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type.name);
+  }, []);
 
   return (
-    <>
+    <Layout style={{ backgroundColor: theme["type-" + type + "-100"] }}>
       <Layout style={styles.item}>
         <Text style={{ color: "#fff" }}>Type</Text>
         <Layout style={styles.types}>
@@ -39,24 +45,29 @@ export default function CompPokemonInfo(props) {
           ))}
         </Layout>
       </Layout>
-      <Divider style={{ backgroundColor: theme["type-" + props.type] }} />
+      <Divider style={{ backgroundColor: theme["type-" + type] }} />
+      <Layout style={styles.item}>
+        <Text style={{ color: "#fff" }}>Number</Text>
+        <Text style={{ color: "#fff" }}>{props.pokemon.id}</Text>
+      </Layout>
+      <Divider style={{ backgroundColor: theme["type-" + type] }} />
       <Layout style={styles.item}>
         <Text style={{ color: "#fff" }}>Weight</Text>
         <Text style={{ color: "#fff" }}>{props.pokemon.weight} lbs.</Text>
       </Layout>
-      <Divider style={{ backgroundColor: theme["type-" + props.type] }} />
+      <Divider style={{ backgroundColor: theme["type-" + type] }} />
       <Layout style={styles.item}>
         <Text style={{ color: "#fff" }}>Height</Text>
         <Text style={{ color: "#fff" }}>{props.pokemon.height} f.</Text>
       </Layout>
-      <Divider style={{ backgroundColor: theme["type-" + props.type] }} />
+      <Divider style={{ backgroundColor: theme["type-" + type] }} />
       <Layout style={styles.item}>
         <Text style={{ color: "#fff" }}>Base Experience</Text>
         <Text style={{ color: "#fff" }}>
           {props.pokemon.base_experience} xp
         </Text>
       </Layout>
-      <Divider style={{ backgroundColor: theme["type-" + props.type] }} />
+      <Divider style={{ backgroundColor: theme["type-" + type] }} />
       <Layout style={styles.item}>
         <Text style={{ color: "#fff" }}>Abilities</Text>
         <Layout style={styles.abilities}>
@@ -70,7 +81,7 @@ export default function CompPokemonInfo(props) {
           ))}
         </Layout>
       </Layout>
-    </>
+    </Layout>
   );
 }
 

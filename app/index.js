@@ -6,6 +6,8 @@ import { getPokemonInfo } from "../graphql/GetPokemonInfo";
 import CompPokemonHeader from "../components/CompPokemonHeader";
 import CompPokemonImage from "../components/CompPokemonImage";
 import CompPokemonInfo from "../components/CompPokemonInfo";
+import CompMainHeader from "../components/CompMainHeader";
+import { ScrollView } from "react-native";
 
 export default function Pokemon() {
   const route = useRoute();
@@ -24,26 +26,25 @@ export default function Pokemon() {
 
   if (pokemon && type) {
     return (
-      <Layout
-        style={{
-          height: "100%",
-          backgroundColor: theme["type-" + type + "-100"],
-        }}
-      >
+      <>
         <StatusBar
           barStyle="light-content"
           hidden={false}
-          backgroundColor={theme["type-" + type + "-100"]}
+          backgroundColor="#900"
           translucent={false}
         />
-        <CompPokemonHeader
-          id={pokemon.id}
-          name={pokemon.name}
-          type={type}
-        ></CompPokemonHeader>
-        <CompPokemonImage id={pokemon.id} type={type}></CompPokemonImage>
-        <CompPokemonInfo pokemon={pokemon} type={type}></CompPokemonInfo>
-      </Layout>
+        <CompMainHeader></CompMainHeader>
+        <CompPokemonImage pokemon={pokemon}></CompPokemonImage>
+        <ScrollView
+          style={{
+            height: "100%",
+            backgroundColor: theme["type-" + type + "-100"],
+          }}
+        >
+          <CompPokemonHeader pokemon={pokemon}></CompPokemonHeader>
+          <CompPokemonInfo pokemon={pokemon}></CompPokemonInfo>
+        </ScrollView>
+      </>
     );
   }
 }

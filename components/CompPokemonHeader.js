@@ -1,32 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { Layout, Text, Icon } from "@ui-kitten/components/ui";
+import { Divider, Layout, Text, Icon } from "@ui-kitten/components/ui";
 import { useRouter } from "expo-router";
 import { useTheme } from "@ui-kitten/components";
 
 export default function CompPokemonHeader(props) {
   const router = useRouter();
   const theme = useTheme();
+  const [type, setType] = useState("normal");
+
+  useEffect(() => {
+    setType(props.pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type.name);
+  }, []);
 
   return (
-    <Layout
-      style={[
-        styles.header,
-        { backgroundColor: theme["type-" + props.type + "-100"] },
-      ]}
-    >
-      <Text style={styles.text} category="h6">
-        {props.id} - {props.name}
-      </Text>
-      <Icon
-        fill="#fff"
-        name="search"
-        style={styles.icon}
-        onPress={() => {
-          router.push("/PokemonList");
-        }}
-      ></Icon>
-    </Layout>
+    <>
+      <Layout
+        style={[
+          styles.header,
+          { backgroundColor: theme["type-" + type + "-100"] },
+        ]}
+      >
+        <Text style={styles.text} category="h5">
+          {props.pokemon.name}
+        </Text>
+      </Layout>
+      <Divider style={{ backgroundColor: theme["type-" + type] }} />
+    </>
   );
 }
 
@@ -35,9 +35,9 @@ const styles = StyleSheet.create({
     height: 70,
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    padding: 15,
+    padding: 10,
     position: "relative",
   },
   text: {
