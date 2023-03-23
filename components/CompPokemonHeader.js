@@ -11,7 +11,7 @@ export default function CompPokemonHeader(props) {
 
   useEffect(() => {
     setType(props.pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type.name);
-  }, []);
+  }, [props.pokemon]);
 
   return (
     <>

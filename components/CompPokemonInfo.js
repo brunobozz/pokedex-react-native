@@ -10,7 +10,7 @@ export default function CompPokemonInfo(props) {
 
   useEffect(() => {
     setType(props.pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type.name);
-  }, []);
+  }, [props.pokemon]);
 
   return (
     <Layout style={{ backgroundColor: theme["type-" + type + "-100"] }}>

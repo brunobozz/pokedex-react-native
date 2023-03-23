@@ -1,7 +1,7 @@
 import { StatusBar } from "react-native";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRoute } from "@react-navigation/native";
-import { Layout, useTheme } from "@ui-kitten/components";
+import { useTheme } from "@ui-kitten/components";
 import { getPokemonInfo } from "../graphql/GetPokemonInfo";
 import CompPokemonHeader from "../components/CompPokemonHeader";
 import CompPokemonImage from "../components/CompPokemonImage";
@@ -30,17 +30,12 @@ export default function Pokemon() {
         <StatusBar
           barStyle="light-content"
           hidden={false}
-          backgroundColor="#900"
+          backgroundColor={theme["type-" + type + "-100"]}
           translucent={false}
         />
-        <CompMainHeader></CompMainHeader>
+        <CompMainHeader type={type}></CompMainHeader>
         <CompPokemonImage pokemon={pokemon}></CompPokemonImage>
-        <ScrollView
-          style={{
-            height: "100%",
-            backgroundColor: theme["type-" + type + "-100"],
-          }}
-        >
+        <ScrollView>
           <CompPokemonHeader pokemon={pokemon}></CompPokemonHeader>
           <CompPokemonInfo pokemon={pokemon}></CompPokemonInfo>
         </ScrollView>
